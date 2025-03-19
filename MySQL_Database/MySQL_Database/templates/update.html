@@ -1,0 +1,31 @@
+{% extends "index.html" %}
+{% block content %}
+    <div class="container-fluid" style="margin-top:50px;">
+        <div class="col-md-offset-4 col-md-4"> 
+            <form action="/update/{{data.id}}" method="POST" autocomplete="off">
+                {% csrf_token %}
+               <h3 class="page-header text-primary text-center"><i class='fa fa-edit'> Update </i></h3>
+               <div class="form-group">
+                    <label>Studyname</label>
+                    <input type="text" class="form-control" value="{{data.Studyname}}" name="Studyname">
+               </div> 
+               <div class="form-group">
+                    <label>study_description</label>
+                    <input type="text" class="form-control" value="{{data.study_description}}" name="study_description">
+                </div>
+                <div class="form-group">
+                    <label>study_phase</label>
+                    <input type="text" class="form-control" value="{{data.study_phase}}" name="study_phase">
+                </div>
+                <div class="form-group">
+                    <label>sponsor_name</label>
+                    <input type="text" class="form-control" value="{{data.sponsor_name}}" name="sponsor_name">
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary btn-block" value="Update">
+                    <a class="btn btn-success btn-block" href="{% url 'home' %}">Cancel</a><br>
+                </div>   
+            </form>
+        </div>
+    </div>
+{% endblock %}
