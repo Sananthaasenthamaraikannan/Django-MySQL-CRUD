@@ -1,7 +1,11 @@
+import logging
 from inspect import Parameter
 from django.shortcuts import redirect, render
 from .forms import MyRegisterForm
 from .models import RegisterForm
+from django.contrib.auth.models import User
+
+logger = logging.getLogger('django')
 
 def home(request):
     data=RegisterForm.objects.all()
@@ -53,3 +57,14 @@ def delete_selected(request):
             RegisterForm.objects.filter(id__in=selected_ids).delete()
 
     return redirect("home")
+
+def my_view(request):
+    logger.info("Testing the logger")  # General log message
+    
+    try:
+        user = User.objects.get(pk=1)  # Example: Fetch user with primary key 1
+        logger.debug(f"User found: {user.username}")  # Debug log if found
+    except User.DoesNotExist:
+        logger.error("User with ID 1 does not exist")  # Log error if user is missing
+
+    return render(request, "home.html")
